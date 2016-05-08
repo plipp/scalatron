@@ -4,7 +4,7 @@ import javax.ws.rs._
 import core.{Response, MediaType}
 import scalatron.core.Scalatron.SandboxState
 import collection.JavaConversions
-import collection.JavaConversions.JMapWrapper
+import scala.collection.convert.Wrappers.JMapWrapper
 import scalatron.webServer.rest.UserSession
 import UserSession.SandboxAttributeKey
 import org.eclipse.jetty.http.HttpStatus

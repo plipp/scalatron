@@ -4,7 +4,7 @@ import sbtassembly.AssemblyPlugin.autoImport._
 
 
 object build extends Build {
-    val compilerVersion = "2.10.5"
+    val compilerVersion = "2.11.8"
 
     lazy val libAkkaActors = "com.typesafe.akka" %% "akka-actor" % "2.3.6"
 
@@ -68,12 +68,13 @@ object build extends Build {
                 "org.codehaus.jackson" % "jackson-jaxrs" % "1.9.2",
                 "com.sun.jersey" % "jersey-bundle" % "1.12",
                 "javax.servlet" % "servlet-api" % "2.5",
+                "org.scala-lang.modules" % "scala-parser-combinators_2.11" % "1.0.4",
+                "org.scala-lang.modules" % "scala-xml_2.11" % "1.0.5",
                 "org.eclipse.jgit" % "org.eclipse.jgit" % "1.3.0.201202151440-r",
                 "org.eclipse.jgit" % "org.eclipse.jgit.http.server" % "1.3.0.201202151440-r",
 		            "org.scalatest" %% "scalatest" % "2.2.4" % "test",
                 "org.testng" % "testng" % "6.5.1" % "test",
-		            "org.specs2" % "specs2_2.10" % "2.4.17" % "test",
-                "org.specs2" %% "specs2-scalaz-core" % "7.0.0" % "test"
+		            "org.specs2" % "specs2_2.11" % "2.4.17" % "test"
             ),
             resolvers ++= Seq("JGit Repository" at "http://download.eclipse.org/jgit/maven",
             "Scalaz Bintray Repo"  at "http://dl.bintray.com/scalaz/releases")
@@ -85,7 +86,8 @@ object build extends Build {
     lazy val cli = Project("ScalatronCLI", file("ScalatronCLI"),
         settings = standardSettings ++ Seq(
             libraryDependencies ++= Seq(
-                "org.apache.httpcomponents" % "httpclient" % "4.1.3"
+                "org.apache.httpcomponents" % "httpclient" % "4.1.3",
+                "org.scala-lang.modules" % "scala-parser-combinators_2.11" % "1.0.4"
             )
         ) ++ Seq (
             jarName in assembly := "ScalatronCLI.jar"
@@ -99,7 +101,7 @@ object build extends Build {
             resourceDirectory in Test <<= baseDirectory / "test/resources"
         ) ++ Seq(
             libraryDependencies ++= Seq(
-                "org.scala-tools.testing" %% "specs" % "1.6.9",
+                "org.specs2" % "specs2_2.11" % "2.4.17" % "test",
                 "commons-io" % "commons-io" % "2.3",
                 "org.apache.commons" % "commons-lang3" % "3.1"
             )

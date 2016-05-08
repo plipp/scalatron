@@ -4,7 +4,7 @@
 package scalatronRemote.impl
 
 import scalatronRemote.api.ScalatronRemote
-import util.parsing.json.JSONFormat
+import scala.util.parsing.json.JSONFormat
 import scalatronRemote.api.ScalatronRemote._
 import scalatronRemote.impl.Connection.HttpFailureCodeException
 import org.apache.http.HttpStatus

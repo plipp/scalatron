@@ -3,32 +3,33 @@
  */
 package org.fusesource.scalamd.test
 
-import org.specs.Specification
+import org.specs2.mutable.Specification
 import org.fusesource.scalamd.Markdown
 import org.apache.commons.lang3.StringUtils
-import org.specs.matcher.Matcher
+import org.specs2.matcher.{Expectable, Matcher}
 import org.apache.commons.io.IOUtils
 
 object MarkdownSpec extends Specification {
 
   val beFine = new Matcher[String] {
-    def apply(name: => String) = {
+    def apply[S <: String](s: Expectable[S]) = {
+      val name = s.value
       val textFile = this.getClass.getResourceAsStream("/" + name + ".text")
       val htmlFile = this.getClass.getResourceAsStream("/" + name + ".html")
       val text = Markdown(IOUtils.toString(textFile, "ISO-8859-1")).trim
-//      println("[%s]".format(text))
       val html = IOUtils.toString(htmlFile, "ISO-8859-1").trim
       val diffIndex = StringUtils.indexOfDifference(text, html)
       val diff = StringUtils.difference(text, html)
-      (diffIndex == -1,
+
+      result(diffIndex == -1,
           "\"" + name + "\" is fine",
-          "\"" + name + "\" fails at " + diffIndex + ": " + StringUtils.abbreviate(diff, 32))
+          "\"" + name + "\" fails at " + diffIndex + ": " + StringUtils.abbreviate(diff, 32),
+        s)
     }
   }
 
-  def process = addToSusVerb("process")
 
-  "MarkdownProcessor" should process {
+  "MarkdownProcessor" should  {
     "Images" in {
       "Images" must beFine
     }
