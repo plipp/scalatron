@@ -1,4 +1,5 @@
-SCALATRON - Learn Scala With Friends
+# SCALATRON - Learn Scala With Friends
+
 http://scalatron.github.com - Twitter: @scalatron - scalatron@hotmail.com
 This work is licensed under the Creative Commons Attribution 3.0 Unported License.
 
